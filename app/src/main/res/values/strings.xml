@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TwitSplit App</string>
+    <string name="message_view">Message Output</string>
+</resources>
