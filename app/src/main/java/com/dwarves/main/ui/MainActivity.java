@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements MainMvpView {
     EditText inputEdText;
     @BindView(R.id.split_btn)
     Button splitButton;
-    String sampleMsg = "Split messages will have a \"part indicator\" appended to the beginning of each section. In the example above, the message was split into two chunks, so the part indicators read \"1/2\" and \"2/2\". Be aware that these count toward the character limit.";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
