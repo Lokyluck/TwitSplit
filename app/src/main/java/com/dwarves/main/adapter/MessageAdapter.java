@@ -67,7 +67,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ItemView
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         View holderView = holder.keywordItemView;
-        position = position % subMessageList.size();
 
         TextView subMessageView = holderView.findViewById(R.id.sub_message_text_view);
         String subMessage = subMessageList.get(position);

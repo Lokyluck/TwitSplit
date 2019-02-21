@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TwitSplit App</string>
-    <string name="message_view">Message Output</string>
+    <string name="message_output">Message Output</string>
+    <string name="message_input">Message input</string>
+    <string name="error1">The input text has a word with length greater than 50</string>
+    <string name="error2">The input text has a word with length greater than 50 after add indicator text</string>
 </resources>

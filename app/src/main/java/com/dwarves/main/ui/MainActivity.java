@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.dwarves.main.R;
@@ -18,11 +21,15 @@ import java.util.ArrayList;
  * Date: Feb 21th 2019
  * */
 
-public class MainActivity extends AppCompatActivity implements  MainMvpView {
+public class MainActivity extends AppCompatActivity implements MainMvpView {
 
     @BindView(R.id.list_view)
     RecyclerView recyclerView;
-    String sampleMsg = "I can't believe Tweeter now supports chunking my ";
+    @BindView(R.id.input_text)
+    EditText inputEdText;
+    @BindView(R.id.split_btn)
+    Button splitButton;
+    String sampleMsg = "Split messages will have a \"part indicator\" appended to the beginning of each section. In the example above, the message was split into two chunks, so the part indicators read \"1/2\" and \"2/2\". Be aware that these count toward the character limit.";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,8 +37,16 @@ public class MainActivity extends AppCompatActivity implements  MainMvpView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         //
-        MainPresenter mainPresenter = new MainPresenter(this, this);
-        mainPresenter.getSubMessageList(sampleMsg);
+        MainPresenter mainPresenter = new MainPresenter(this);
+        splitButton.setOnClickListener(v -> {
+            String inputMessage = getInputMessage();
+            mainPresenter.getAndShowSubMessageList(inputMessage);
+        });
+    }
+
+    @Override
+    public String getInputMessage() {
+        return inputEdText.getText().toString();
     }
 
     @Override
@@ -41,5 +56,17 @@ public class MainActivity extends AppCompatActivity implements  MainMvpView {
         recyclerView.setLayoutManager(mLinearLayoutManager);
         MessageAdapter adapter = new MessageAdapter(this, subMessageList);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void showError(int errorCode) {
+        String error = null;
+        if (errorCode == 1) {
+            error = getString(R.string.error1);
+        } else if (errorCode == 2){
+            error = getString(R.string.error2);
+        }
+        if (error != null && !error.isEmpty())
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 }
