@@ -9,6 +9,9 @@ import static org.junit.Assert.assertTrue;
 
 public class SplitTest {
 
+    private static final String SAMPLE_MESSAGE
+            = "I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself.";
+
     // Stub some input messages to cover all test cases
     private static final String INPUT_MESSAGE_1 = "Dwarves Foundation";
 
@@ -35,6 +38,9 @@ public class SplitTest {
         SplitMessageResult subMessageList = CommonUtils.splitMessage(INPUT_MESSAGE_1);
         assertTrue(subMessageList.isSuccess());
         assertEquals(1, subMessageList.size());
+        for (String subMessage : subMessageList) {
+            assertTrue(subMessage.length() <= 50);
+        }
     }
 
     /**
@@ -45,6 +51,9 @@ public class SplitTest {
         SplitMessageResult subMessageList = CommonUtils.splitMessage(INPUT_MESSAGE_2);
         assertTrue(subMessageList.isSuccess());
         assertEquals(2, subMessageList.size());
+        for (String subMessage : subMessageList) {
+            assertTrue(subMessage.length() <= 50);
+        }
     }
 
     /**
@@ -67,5 +76,11 @@ public class SplitTest {
         assertTrue(!subMessageList.isSuccess());
         assertEquals(0, subMessageList.size());
         assertEquals(2, subMessageList.getErrorCode());
+    }
+
+    @Test
+    public void getNumberOfSubMessagesTest() {
+        int numberOfSubMsg = CommonUtils.getNumberOfSubMessages(SAMPLE_MESSAGE);
+        assertEquals(2, numberOfSubMsg);
     }
 }

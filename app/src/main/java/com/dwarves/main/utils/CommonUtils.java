@@ -22,7 +22,7 @@ public class CommonUtils {
 
         // Find number of sub-messages
         int numOfSubMsg = getNumberOfSubMessages(text);
-        //int numOfSubMsg = (int) Math.ceil(textLength/ 49);
+        //int numOfSubMsg = (int) Math.ceil(textLength/ 50);
 
         // Init variables
         String[] words = text.split(" ");
@@ -53,14 +53,14 @@ public class CommonUtils {
             numOfWordsInSubMsg ++;
             int length = strBuilder.length();
 
-            if (length <= 49)  {
+            if (length <= 50)  {
                 if (i == words.length -1) {
                     // Add the last sub message to list
                     String subMessage = strBuilder.toString();
                     if (subMessage.length() > 0)
                         subMessageList.add(subMessage);
                 } else {
-                    if (strBuilder.length() < 49)
+                    if (strBuilder.length() < 50)
                         strBuilder.append(" ");
                 }
                 i++;
@@ -99,10 +99,11 @@ public class CommonUtils {
      * Calculate number of sub-messages
      * when the message is added indicator texts, example: "1/2 {sub-message 1}", "2/2 {sub-message 2}"
      * */
-    private static int getNumberOfSubMessages(String text) {
+
+    public static int getNumberOfSubMessages(String text) {
         int numOfSubMsg;
         double pureTextLength = text.length();
-        int chunksNumber = (int) Math.ceil(pureTextLength/ 49);
+        int chunksNumber = (int) Math.ceil(pureTextLength/ 50);
         double fixedTextLength;
 
         if (chunksNumber < 10) {
@@ -113,10 +114,10 @@ public class CommonUtils {
             fixedTextLength =
                     tmp * ("x/yy ".length())
                     + (chunksNumber - tmp) * ("xx/yy ".length()) + pureTextLength;
-            // Users can't input text with length greater than 100 * 49 characters one time
+            // Users can't input text with length greater than 100 * 50 characters one time
             // so it isn't necessary to handle case "x/yyy", "xx/yyy",...
         }
-        numOfSubMsg = (int) Math.ceil(fixedTextLength / 49);
+        numOfSubMsg = (int) Math.ceil(fixedTextLength / 50);
         return numOfSubMsg;
     }
 
