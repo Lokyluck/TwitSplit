@@ -1,15 +1,19 @@
-# Home Test
+# TwitSplit
 
-Create a simple Android project. Code to display the following keyword list as designed:
+## Description
 
- ![](./demo.gif)
+The product Tweeter allows users to post short messages limited to 50 characters each.
+Sometimes, users get excited and write messages longer than 50 characters.
+Instead of rejecting these messages, we would like to add a new feature that will split the message into parts and send multiple messages on the user's behalf, all of them meeting the 50 character requirement.
 
-Requirement:
+## Example
 
- * [ ] If the keyword is more than one word, then display in two lines.
- * [ ] Background color is random.
- * [ ] Keywords can be fetched from the following [link](https://gist.githubusercontent.com/talenguyen/38b790795722e7d7b1b5db051c5786e5/raw/63380022f5f0c9a100f51a1e30887ca494c3326e/keywords.json)
+Suppose the user wants to send the following message:
 
-If you have any questions please send email to giang.nguyen@tiki.vn for answers.
+> "I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself."
 
-PS: Please do as well as possible because we only select the best ones.
+This is 91 characters excluding the surrounding quotes. When the user presses send, it will send the following messages:
+
+> "1/2 I can't believe Tweeter now supports chunking" "2/2 my messages, so I don't have to do it myself."
+
+Each message is now 49 characters, each within the allowed limit.
